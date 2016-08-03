@@ -37,7 +37,7 @@
       if (url && url.length > 1) {
         url = decodeURIComponent(url[1]);
       } else {
-        url = "http://petstore.swagger.io/v2/swagger.json";
+        url = "http://localhost:7000/swagger.json";
       }
 
       hljs.configure({
@@ -74,7 +74,10 @@
         docExpansion: "none",
         jsonEditor: false,
         defaultModelRendering: 'schema',
-        showRequestHeaders: false
+        showRequestHeaders: false,
+        operationsSorter: function (a, b) {
+          return typeof a.operation['x-sortOrder'] != "undefined" && typeof b.operation['x-sortOrder'] != "undefined" ? a.operation['x-sortOrder'].localeCompare(b.operation['x-sortOrder']) : 0;
+        }
       });
 
       window.swaggerUi.load();
