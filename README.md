@@ -64,6 +64,20 @@ This will start Swagger UI at `http://localhost`.
 ### Use
 Once you open the Swagger UI, it will load the [Swagger Petstore](http://petstore.swagger.io/v2/swagger.json) service and show its APIs.  You can enter your own server url and click explore to view the API.
 
+#### Loading local specification files
+Swagger UI doesn't seem to bond well will local specification files. Use of either `file://` or relative path doesn't seem to load the file properly. Easiest way out is to run a local HTTP server with CORS enabled:
+
+Installation:
+```
+npm install http-server -g
+```
+
+Running (assumes specification files in `./specs` directory):
+```
+http-server ./specs --cors -c-1
+```
+Now use `https://localhost:8080/{spec}.json` within the Swagger UI. Note that disabling caching via `-c-1` is useful when specification are being editited to allow re-loads.
+
 ### Customize
 You may choose to customize Swagger UI for your organization. Here is an overview of what's in its various directories:
 
